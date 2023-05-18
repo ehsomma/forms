@@ -1,49 +1,72 @@
 console.log("src/index");
 
 const menuItem1 = document.querySelector('#menuItem1');
-const div1 = document.querySelector('#div1');
-const div2 = document.querySelector('#div2');
 
 menuItem1.addEventListener('click', () => {
-    div1.style.display = 'block';
-    div2.style.display = 'none';
+    loadContent1();
 });
 
 menuItem2.addEventListener('click', () => {
-    div1.style.display = 'none';
-    div2.style.display = 'block';
-
     loadContent2();
 });
 
 
-const loadContent2 = (e) => {
+const appendComponent = async (componentName, targetNodeId) => {
     // Source: https://stackoverflow.com/questions/17636528/how-do-i-load-an-html-page-in-a-div-using-javascript.
+    // Source: https://github.com/JeremyLikness/vanillajs-deck/blob/master/js/slideLoader.js
+    // Source: https://youtu.be/D9avX-jtIPM?t=3316 (fazt)
 
-    alert('Cargando...');
-    (e || window.event).preventDefault();
+    try {
+        // Gets the html.
+        const componentHtml = await getComponentHtml(componentName);
 
+        // Appends the html to the node especified.
+        await appendChild(targetNodeId, componentHtml);    
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const getComponentHtml = async (componentName) => {
+    try {
+        const response = await fetch(`./menu/components/${componentName}.html` /*, options */);
+        const html = await response.text();
+        return html;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+const appendChild = async (nodeId, componentHtml) => {
+    // Creates new div element.
     const divElement = document.createElement('div');
+        
+    divElement.innerHTML = componentHtml;
+    const node = document.querySelector(`#${nodeId}`);
+    node.innerHTML = '';
+    node.appendChild(divElement);
+}
+
+const loadContent2 = async () => {
     
+    await appendComponent('content2', 'main-content');
 
-    fetch('./menu/components/content2.html' /*, options */)
-        .then((response) => response.text())
-        .then((html) => {
-            //document.querySelector('#div2').innerHTML = html;
+    const boton1 = document.querySelector('#boton1');
+    boton1.addEventListener('click', (event) => {
+        event.preventDefault();
+        alert('hola 2');
+    });
+}
 
-            // https://youtu.be/D9avX-jtIPM?t=3316 (fazt)
+const loadContent1 = async () => {
 
-            divElement.innerHTML = html;
-            document.querySelector('#div2').innerHTML = '';
-            document.querySelector('#div2').appendChild(divElement);
+    await appendComponent('content1', 'main-content');
 
-            const boton1 = document.querySelector('#boton1');
-            boton1.addEventListener('click', () => {
-                alert('hola');
-            });
+    const boton1 = document.querySelector('#boton1');
+    boton1.addEventListener('click', (event) => {
+        event.preventDefault();
+        alert('hola 1');
+    });
 
-        })
-        .catch((error) => {
-            console.warn(error);
-        });
 }
