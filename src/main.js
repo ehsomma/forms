@@ -1,4 +1,4 @@
-import './menu/index.js';
+import './forms/app.js';
 import './style.css';
 //import './sidebars.css'; // If it loads from here, the style blinks.
 
