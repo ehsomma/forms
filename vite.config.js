@@ -12,6 +12,7 @@ export default defineConfig({
                 main: resolve(__dirname, './src/index.html'),
                 content1: resolve(__dirname, './src/forms/components/content1.html'),
                 content2: resolve(__dirname, './src/forms/components/content2.html'),
+                content3: resolve(__dirname, './src/forms/components/content3.html'),
             }
         }
     },
