@@ -5,7 +5,7 @@ export default defineConfig({
     base: '/forms/', // Para que funcione en github pages. /js-vite-blackjack/ es el nombre del repo.
     root: 'src',
     build: {
-        outDir: './docs', // Se modifica de ./dist a ./docs para que funcione en github pages. 
+        outDir: '../docs', // Se modifica de ./dist a ./docs para que funcione en github pages. 
         rollupOptions: {
             input: {
                 // Docs: https://vitejs.dev/guide/build.html#multi-page-app.
