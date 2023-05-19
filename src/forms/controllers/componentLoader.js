@@ -1,5 +1,5 @@
 // Source: https://stackoverflow.com/questions/17636528/how-do-i-load-an-html-page-in-a-div-using-javascript.
-// Source: https://github.com/JeremyLikness/vanillajs-deck/blob/master/js/slideLoader.js
+// Source: https://github.com/JeremyLikness/vanillajs-deck/blob/master/js/slideLoader.js (slide loader)
 // Source: https://youtu.be/D9avX-jtIPM?t=3316 (fazt)
 
 export const appendComponent = async (componentName, targetNodeId) => {
