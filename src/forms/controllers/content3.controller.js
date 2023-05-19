@@ -1,4 +1,5 @@
 import { createElementWithTemplate, appendComponent } from './componentLoader.js';
+import SubContent1 from './sub-content1.controller.js';
 
 const Template = 'content3'; // Html template.
 
@@ -13,21 +14,10 @@ export default async () => {
         alert('hola 3');
     });
 
-
-
-    const divSubContentTarget = divElement.querySelector('#sub-content-1');
-    const divNewSubContent = await createElementWithTemplate('sub-content1');
-    
-    divSubContentTarget.innerHTML = '';
-    divSubContentTarget.appendChild(divNewSubContent);
-
-    const botonSub1 = divElement.querySelector('#botonSub1');
-    botonSub1.addEventListener('click', (event) => {
-        event.preventDefault();
-        alert('hola 3');
-    });
-    
-    // no:.... hay que usar sub-content1.controller.js para obtener el nuvoDiv
-
+    // Adds sub controller.
+    const divSubContentTarget = divElement.querySelector('#sub-content-1');   
+    const newDivSubContent1 = await SubContent1();
+    divSubContentTarget.appendChild(newDivSubContent1);
+  
     return divElement;
 };
